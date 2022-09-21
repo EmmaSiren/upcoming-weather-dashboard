@@ -12,7 +12,7 @@ Lorem Ipsum Dolor
 ## Usage
 
 To view the website application please follow the provided link: 
-
+https://emmasiren.github.io/upcoming-weather-dashboard/
 
 The following image shows the web application when loaded correctly.
 ![img](./assets/images/)
