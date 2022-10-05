@@ -9,3 +9,12 @@ header {
     padding: 10px;
 }
 
+.col-md-9 {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.row{
+ margin-left: 0;
+ margin-right: 0;
+}
