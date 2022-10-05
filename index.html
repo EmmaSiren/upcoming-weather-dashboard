@@ -5,37 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <header>Weather Dashboard</header>
-
-    <div>
+  <header>Weather Dashboard</header>
+    <div class="row">
+      <div class="col-6 col-md-3">
         <h1>Search for a City:</h1>
-            <input>
-            <submit>Search</submit>
-    </div>
-
-    <div class="today">
-        <h1 class="city date"></h1>
-        <div>
-            <h2 class="temp"></h2>
-            <h2 class="wind"></h2>
-            <h2 class="humidity"></h2>
-            <h2 class="uvIndex"></h2>
+          <input>
+          <input class="btn" type="submit" value="Search">
+      </div>
+      <div class="col-md-9">
+        <div class="today card">
+          <div class="card-body">
+            <h1 class="city date card-title">City</h1>
+            <h3 class="temp">Temp</h3>
+            <h3 class="wind">Wind</h3>
+            <h3 class="humidity">Humidity</h3>
+            <h3 class="uvIndex">UVIndex</h3>
+          </div>
         </div>
-    </div>
 
-    <div>
-        <h1 class="fiveDay"></h1>
-        <div>
-            <h2 class="date"></h2>
-            <h2 class="symbol"></h2>
-            <h2 class="temp"></h2>
-            <h2 class="wind"></h2>
-            <h2 class="humidity"></h2>
+        <div class="card">
+          <h1 class="fiveDay card-title col">Five Day</h1>
+            <div class="card-body row">
+              <div class="col">
+                <h2 class="date">Date</h2>
+                <h2 class="symbol">Symbol</h2>
+                <h2 class="temp">Temp</h2>
+                <h2 class="wind">Wind</h2>
+                <h2 class="humidity">Humidity</h2>
+              </div>
+              <div class="col">
+                <h2 class="date">Date</h2>
+                <h2 class="symbol">Symbol</h2>
+                <h2 class="temp">Temp</h2>
+                <h2 class="wind">Wind</h2>
+                <h2 class="humidity">Humidity</h2>
+              </div>
+              <div class="col">
+                <h2 class="date">Date</h2>
+                <h2 class="symbol">Symbol</h2>
+                <h2 class="temp">Temp</h2>
+                <h2 class="wind">Wind</h2>
+                <h2 class="humidity">Humidity</h2>
+              </div>
+              <div class="col">
+                <h2 class="date">Date</h2>
+                <h2 class="symbol">Symbol</h2>
+                <h2 class="temp">Temp</h2>
+                <h2 class="wind">Wind</h2>
+                <h2 class="humidity">Humidity</h2>
+              </div>
+              <div class="col">
+                <h2 class="date">Date</h2>
+                <h2 class="symbol">Symbol</h2>
+                <h2 class="temp">Temp</h2>
+                <h2 class="wind">Wind</h2>
+                <h2 class="humidity">Humidity</h2>
+              </div>
+            </div>
         </div>
+      </div>
     </div>
-    <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>
