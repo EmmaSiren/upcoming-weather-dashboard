@@ -8,13 +8,30 @@ var forecast = $('.forecast');
 fetch(queryURL).then(function (response) {
     return response.json();
 }).then(function (data) {
-    // console.log(data);
-    $('.city').text(data.name);
-    $('.temp').text(data.main.temp);
-    $('.wind').text(data.wind.speed);
-    $('.humidity').text(data.main.humidity);
-    // $('.uvIndex').text(data.uvi);
+    console.log(data);
+    function timeConverter(){
+        var a = new Date(data.dt * 1000);
+        var months = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var time = month + '/' + date + '/' + year;
+        return time;
+    }
+    $('.city').text(data.name + ' (' + (timeConverter()) + ') ');
+    $('.city').append('<img>');
+    $('img').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
+    $('.temp').text('Temp: ' + data.main.temp);
+    $('.wind').text('Wind: ' + data.wind.speed);
+    $('.humidity').text('Humidity: ' + data.main.humidity);
 });
+
+// fetch ('https://api.openweathermap.org/data/2.5/onecall?&appid=' + APIKey).then(function(response) {
+//     return response.json();
+//     }).then(function(data) {
+//     // $('.uvIndex').text('UV Index: ' + data.current.uvi);
+//     console.log(data);
+// });
 
 fetch(forecastURL).then(function (response) {
     return response.json();
@@ -41,17 +58,13 @@ fetch(forecastURL).then(function (response) {
             var wind = document.createElement('h3');
             var humidity = document.createElement('h3');
             var iconCode = data.list[i].weather[0].icon;
-            symbol.setAttribute('src', 'http://openweathermap.org/img/w/' + iconCode + '.png' );
+            symbol.setAttribute('src', 'http://openweathermap.org/img/w/' + iconCode + '.png');
             $(date).text(timeConverter());
             $(temp).text('Temp: ' + data.list[i].main.temp + ' °F');
             $(wind).text('Wind: ' + data.list[i].wind.speed + ' MPH');
             $(humidity).text('Humidity: ' + data.list[i].main.humidity + '%');
             forecast.append(daily);
-            daily.append(date);
-            daily.append(symbol);
-            daily.append(temp);
-            daily.append(wind);
-            daily.append(humidity);
+            daily.append(date, symbol, temp, wind, humidity);
         };
     };
 });
