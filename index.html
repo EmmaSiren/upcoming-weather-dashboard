@@ -15,11 +15,11 @@
 <body>
   <header>Weather Dashboard</header>
     <div class="row">
-      <div class="col-6 col-md-3 test4">
+      <div class="col-6 col-md-3">
         <h1>Search for a City:</h1>
-          <input class="input">
-          <input class="btn" type="submit" value="Search">
-          <div class="card-footer"></div>
+          <input type="text" class="form-control" placeholder="San Diego">
+          <input class="btn btn-info btn-block" type="submit" value="Search">
+          <div class="card-footer bg-transparent"></div>
       </div>
       <div class="col-md-9">
         <div class="card">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="card">
-          <h1 class="fiveDay card-title col">Five Day</h1>
+          <p class="fiveDay card-title col"></p>
           <div class="forecast card-body row"></div>
         </div>
       </div>

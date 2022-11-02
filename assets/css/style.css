@@ -1,21 +1,56 @@
-* {
+/* * {
     background-color: rgb(102, 102, 102);
-}
+} */
 
 header {
-    font-size: 40px;
-    text-align: center;
-    background-color: lightblue;
-    padding: 10px;
+  font-size: 40px;
+  text-align: center;
+  background-image: linear-gradient(to right, rgb(42, 117, 187), rgb(15, 15, 122));
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+.btn-info {
+  margin: 10px 0;
 }
 
 .col-md-9 {
-    padding-right: 0;
-    padding-left: 0;
+  padding-right: 0;
+  padding-left: 0;
 }
 
-.row{
- margin-left: 0;
- margin-right: 0;
+.row {
+  margin-left: 0;
+  margin-right: 0;
 }
 
+.card {
+  border: none;
+}
+
+.today {
+  padding: 5px;
+  margin: 15px;
+}
+
+.badge {
+  color: white;
+}
+
+.forecast {
+  padding: 0;
+}
+
+.fiveDay {
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.navy {
+  background-color: rgb(61, 70, 99);
+  margin: 0 20px;
+  padding: 5px;
+  color: white;
+  font-weight: 500;
+}

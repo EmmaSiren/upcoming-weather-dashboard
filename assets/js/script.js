@@ -1,7 +1,7 @@
 var cityHistoryArray = [];
 
 $('.btn').click(function() {
-  var city = document.querySelector('.input').value;
+  var city = document.querySelector('.form-control').value;
   getWeather(city);
 })
 
@@ -9,8 +9,6 @@ function getWeather(city) {
   var APIKey = "3f62ce3b1bc74cc582fff8ac8274cf61";
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
   var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + APIKey;
-  // var uviURL = "https://api.openweathermap.org/data/2.5/onecall?lat=33.44&lon=-94.04&appid=" + APIKey;
-  var forecast = $('.forecast');
 
   fetch(queryURL).then(function (response) {
     return response.json();
@@ -25,20 +23,38 @@ function getWeather(city) {
       var time = month + '/' + date + '/' + year;
       return time;
     }
+    $('.today').css("border", "1px solid black");
     $('.city').text(data.name + ' (' + (timeConverter()) + ') ');
     $('.city').append('<img>');
     $('img').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
     $('.temp').text('Temp: ' + data.main.temp + '°F');
     $('.wind').text('Wind: ' + data.wind.speed + ' MPH');
     $('.humidity').text('Humidity: ' + data.main.humidity + '%');
-  });
+    $('.uvIndex').text('UV Index: ');
 
-  // fetch (uviURL).then(function(response) {
-  //     return response.json();
-  // }).then(function (data) {
-  //     console.log(data);
-  //     $('.uvIndex').text('UVI Index: ' + data.current.uvi);
-  // });
+    var lat = data.coord.lat;
+    var lon = data.coord.lon;
+    var uviURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+
+    fetch(uviURL).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log(data);
+      var UVbutton = document.createElement('span');
+      $(UVbutton).text(data.current.uvi);
+      $(UVbutton).attr('class', 'badge');
+      $('.uvIndex').append(UVbutton);
+
+      if (UVbutton.innerText > 6) {
+        $(UVbutton).css('background-color', 'red');
+      } else if (UVbutton.innerText >= 3) {
+        $(UVbutton).css('background-color', 'gold');
+      } else {
+        $(UVbutton).css('background-color', 'green')
+      }
+    });
+    
+  });
 
   fetch(forecastURL).then(function (response) {
     return response.json();
@@ -59,22 +75,23 @@ function getWeather(city) {
           return time;
         }
 
-        var city = document.createElement('h1');
+        $('.fiveDay').text('5-Day Forecast:')
+
         var daily = document.createElement('div');
-        var date = document.createElement('h2');
+        var date = document.createElement('p');
         var symbol = document.createElement('img');
-        var temp = document.createElement('h3');
-        var wind = document.createElement('h3');
-        var humidity = document.createElement('h3');
+        var temp = document.createElement('p');
+        var wind = document.createElement('p');
+        var humidity = document.createElement('p');
         var iconCode = data.list[i].weather[0].icon;
-        symbol.setAttribute('src', 'http://openweathermap.org/img/w/' + iconCode + '.png');
+        $(daily).attr('class', 'card-body navy');
+        $(symbol).attr('src', 'http://openweathermap.org/img/w/' + iconCode + '.png');
         $(date).text(timeConverter());
         $(temp).text('Temp: ' + data.list[i].main.temp + '°F');
         $(wind).text('Wind: ' + data.list[i].wind.speed + ' MPH');
         $(humidity).text('Humidity: ' + data.list[i].main.humidity + '%');
-        $(city).text('City: ' + data.city.name)
-        forecast.append(daily);
-        daily.append(date, city, symbol, temp, wind, humidity);
+        $('.forecast').append(daily);
+        daily.append(date, symbol, temp, wind, humidity);
       };
     };
     storeCityHistory();
@@ -88,6 +105,7 @@ function getWeather(city) {
     cityHistoryArray.push(city);
     localStorage.setItem('cityHistoryArray', JSON.stringify(cityHistoryArray));
     var citiesContainer = document.createElement('button');
+    $(citiesContainer).attr('class', 'btn btn-secondary btn-block')
     for ( i = 0; i < cityHistoryArray.length; i++) {
       $(citiesContainer).text(JSON.parse(localStorage.getItem('cityHistoryArray'))[i]);
       $('.card-footer').append(citiesContainer);
