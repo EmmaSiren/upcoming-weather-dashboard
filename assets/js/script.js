@@ -1,8 +1,11 @@
-var cityHistory = [];
-var submitCity = document.querySelector('.btn');
+var cityHistoryArray = [];
 
-function getWeather() {
+$('.btn').click(function() {
   var city = document.querySelector('.input').value;
+  getWeather(city);
+})
+
+function getWeather(city) {
   var APIKey = "3f62ce3b1bc74cc582fff8ac8274cf61";
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
   var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + APIKey;
@@ -29,8 +32,6 @@ function getWeather() {
     $('.wind').text('Wind: ' + data.wind.speed + ' MPH');
     $('.humidity').text('Humidity: ' + data.main.humidity + '%');
   });
-
-
 
   // fetch (uviURL).then(function(response) {
   //     return response.json();
@@ -76,21 +77,21 @@ function getWeather() {
         daily.append(date, city, symbol, temp, wind, humidity);
       };
     };
+    storeCityHistory();
   });
 
-  console.log(cityHistory.indexOf(city));
-  if (cityHistory.indexOf(city) !== -1) {
-    return;
-  }
-  cityHistory.push(city);
-  localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
-  var test1 = document.createElement('div');
-
-  for ( i = 0; i < cityHistory.length; i++) {
-    $(test1).text(JSON.parse(localStorage.getItem('cityHistory'))[i]);
-    $('.card-footer').append(test1);
+  function storeCityHistory() {
+    console.log(cityHistoryArray.indexOf(city));
+    if (cityHistoryArray.indexOf(city) !== -1) {
+      return;
+    };
+    cityHistoryArray.push(city);
+    localStorage.setItem('cityHistoryArray', JSON.stringify(cityHistoryArray));
+    var citiesContainer = document.createElement('button');
+    for ( i = 0; i < cityHistoryArray.length; i++) {
+      $(citiesContainer).text(JSON.parse(localStorage.getItem('cityHistoryArray'))[i]);
+      $('.card-footer').append(citiesContainer);
+    };
+    $(citiesContainer).click(function() { getWeather(this.innerText) });
   };
-
-
 };
-submitCity.addEventListener('click', getWeather);
