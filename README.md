@@ -8,7 +8,7 @@
 I created this app as a way to help a traveler better plan a trip based on weather outlook for their desired cities and as practice using server-side APIs. Although no starter code was given, the HTML was pretty simple to set up as most of the content is served up using JavaScript. Due to implementing the Bootstrap framework, not much custom CSS was needed. 
 
 
-**Note: There was an [issue](/README.md/#issue) with the OpenWeather One Call API 2.5 where some features have been deprecated for new API keys.**
+**Note: There was an [issue](/README.md/##issue) with the OpenWeather One Call API 2.5 where some features have been deprecated for new API keys.**
 
 
 Due to issues mentioned in the note above, I decided to use OpenWeather’s Current Weather Data API and 5 Day / 3 Hour Forecast API for the daily and five day forecast calls. Once the API call functions were provided with the corresponding URL including user inputted city, I coded the data to populate in the appropriate fields. Daily weather fields were hardcoded to the HTML and the data was simply passed through to each element. The five day forecast, however, required a for-loop in order to display weather information for each day. 
